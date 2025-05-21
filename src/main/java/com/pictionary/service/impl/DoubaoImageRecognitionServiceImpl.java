@@ -28,10 +28,10 @@ public class DoubaoImageRecognitionServiceImpl implements ImageRecognitionServic
     private final RestTemplate restTemplate;
     private final ObjectMapper objectMapper;
     
-    @Value("${ai.douban.api-key:}")
+    @Value("${ai.doubao.api-key:}")
     private String apiKey;
     
-    @Value("${ai.douban.enabled:true}")
+    @Value("${ai.doubao.enabled:true}")
     private boolean enabled;
     
     // 豆包API接口地址
