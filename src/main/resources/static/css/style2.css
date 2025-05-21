@@ -1,0 +1,118 @@
+/* src/main/resources/static/css/styles.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.game-area {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.drawing-panel {
+    flex: 1;
+    min-width: 500px;
+}
+
+canvas {
+    border: 1px solid #ccc;
+    background-color: white;
+    cursor: crosshair;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.tools {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+button {
+    padding: 8px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.color-picker, .line-width {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.result-panel {
+    flex: 1;
+    min-width: 300px;
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+#resultArea {
+    min-height: 200px;
+}
+
+.hidden {
+    display: none;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-left-color: #4CAF50;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.prediction {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #e9f7ef;
+    border-radius: 4px;
+    border-left: 4px solid #4CAF50;
+}
+
+.confidence-bar {
+    height: 10px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+.confidence-level {
+    height: 100%;
+    background-color: #4CAF50;
+    border-radius: 5px;
+}

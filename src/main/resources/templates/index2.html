@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PICTIONARY</title>
+
+    <link rel="stylesheet" href="/static/css/style2.css">
+</head>
+<body>
+<div class="container">
+    <h1>你画我猜</h1>
+
+    <div class="game-area">
+        <div class="drawing-panel">
+            <canvas id="drawingCanvas" width="500" height="400"></canvas>
+            <div class="tools">
+                <button id="clearButton">清除画布</button>
+                <button id="undoButton">撤回</button>
+                <button id="guessButton">AI猜测</button>
+                <div class="color-picker">
+                    <span>颜色:</span>
+                    <input type="color" id="colorPicker" value="#000000">
+                </div>
+                <div class="line-width">
+                    <span>线宽:</span>
+                    <input type="range" id="lineWidth" min="1" max="20" value="3">
+                </div>
+            </div>
+        </div>
+
+        <div class="result-panel">
+            <h2>AI猜测结果</h2>
+            <div id="resultArea">
+                <p>请在左侧画布上绘制一个物体，然后点击"AI猜测"按钮。</p>
+            </div>
+            <div id="loadingIndicator" class="hidden">
+                <div class="spinner"></div>
+                <p>AI正在识别中...</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/static/js/drawing.js"></script>
+
+</body>
+</html>
