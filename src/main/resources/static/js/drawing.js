@@ -142,7 +142,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const imageData = canvas.toDataURL('image/png');
 
         // 发送到后端API
-        fetch('/api/drawing/recognize', {
+        fetch('/api/drawing/doubao/recognize', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
