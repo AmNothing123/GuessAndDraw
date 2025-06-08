@@ -157,15 +157,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
             if (data.success) {
                 const prediction = data.prediction;
-                const confidence = data.confidence;
+                const fullContent = data.fullContent || '';
+
+                // 处理完整内容的显示，将\n转换为<br>标签
+                const formattedContent = fullContent
+                    .replace(/\n/g, '<br>')
+                    .replace(/\s/g, '&nbsp;');
 
                 resultArea.innerHTML = `
                     <div class="prediction">
                         <p>我猜这是一个: ${prediction}</p>
-                        <p>可信度: ${confidence}%</p>
-                        <div class="confidence-bar">
-                            <div class="confidence-level" style="width: ${confidence}%"></div>
-                        </div>
+                        <div class="description">${formattedContent}</div>
+                              
                     </div>
                 `;
             } else {

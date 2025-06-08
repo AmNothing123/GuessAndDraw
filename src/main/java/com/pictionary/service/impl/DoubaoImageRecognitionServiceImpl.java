@@ -73,7 +73,11 @@ public class DoubaoImageRecognitionServiceImpl implements ImageRecognitionServic
             // 构建多模态请求内容
             Map<String, Object> messageContent = new HashMap<>();
             messageContent.put("type", "text");
-            messageContent.put("text", "这是什么画？请只回答一个词语，表示你认为画的是什么，不要有任何额外解释。");
+//            messageContent.put("text", "这是什么画？回答的时候请使用标点符号断句");
+            messageContent.put("text", "这是什么画？请按以下格式回答：\n" +
+                    "第一行：你猜测的物体名称（只写一个词）\n" +
+                    "第二行开始：用3-5句话详细描述这个物体的特点、用途或有趣的知识"
+            );
 
             Map<String, Object> imageContent = new HashMap<>();
             imageContent.put("type", "image_url");
@@ -129,7 +133,10 @@ public class DoubaoImageRecognitionServiceImpl implements ImageRecognitionServic
     private Map<String, Object> parseRecognitionResult(Map<String, Object> responseMap) {
         Map<String, Object> result = new HashMap<>();
         result.put("success", true);
-        
+
+
+        //  处理结果
+        //
         try {
             if (responseMap.containsKey("choices")) {
                 List<Map<String, Object>> choices = (List<Map<String, Object>>) responseMap.get("choices");
@@ -137,18 +144,27 @@ public class DoubaoImageRecognitionServiceImpl implements ImageRecognitionServic
                     Map<String, Object> firstChoice = choices.get(0);
                     if (firstChoice.containsKey("message")) {
                         Map<String, Object> message = (Map<String, Object>) firstChoice.get("message");
+
                         if (message.containsKey("content")) {
                             String content = (String) message.get("content");
-                            
+
                             // 提取第一行作为猜测的词语，并移除可能的标点符号
-                            String guessedWord = content.split("\\n")[0]
+                            String[] contentLines = content.split("\\n");
+                            String guessedWord = contentLines[0]
                                     .replaceAll("[，。！？,.!?]", "")
                                     .trim();
-                            
+
+                            // 保存完整的内容，包括换行
                             result.put("prediction", guessedWord);
-                            result.put("confidence", 85); // 设置一个默认的置信度
-                            log.info("豆包AI识别结果: {}", guessedWord);
-                        }
+                            result.put("fullContent", content);
+
+
+////                            // 提取第一行作为猜测的词语，并移除可能的标点符号
+//                            String guessedWord = content;
+//                            result.put("prediction", guessedWord);
+
+                            log.info("豆包AI识别结果: {}", guessedWord+content);
+                       }
                     }
                 }
             }
