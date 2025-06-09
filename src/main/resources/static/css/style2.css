@@ -1,94 +1,270 @@
 /* src/main/resources/static/css/styles.css */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
+
+/* 导入简洁字体 */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segui UI', 'Microsoft YaHei', sans-serif;
+    background-color: #f8faf7;
+    color: #2d3748;
+    line-height: 1.6;
     padding: 20px;
+    min-height: 100vh;
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.04);
+    border: 1px solid #e2e8f0;
 }
 
 h1 {
     text-align: center;
-    color: #333;
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #4a5568;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+h1::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(90deg, #81c784, #a5d6a7);
+    border-radius: 1px;
 }
 
 .game-area {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 40px;
+    align-items: start;
+}
+
+@media (min-width: 1024px) {
+    .game-area {
+        flex-wrap: nowrap;
+    }
 }
 
 .drawing-panel {
     flex: 1;
     min-width: 500px;
+    background-color: #ffffff;
+    padding: 24px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    transition: box-shadow 0.2s ease;
+}
+
+.drawing-panel:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
 }
 
 canvas {
-    border: 1px solid #ccc;
-    background-color: white;
+    border: 2px solid #e2e8f0;
+    background-color: #ffffff;
     cursor: crosshair;
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    transition: border-color 0.2s ease;
+}
+
+canvas:hover {
+    border-color: #81c784;
+}
+
+canvas:focus {
+    outline: none;
+    border-color: #66bb6a;
+    box-shadow: 0 0 0 3px rgba(129, 199, 132, 0.1);
 }
 
 .tools {
     display: flex;
-    gap: 10px;
+    gap: 12px;
     flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
 }
 
 button {
-    padding: 8px 15px;
-    background-color: #4CAF50;
+    padding: 10px 20px;
+    background-color: #81c784;
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
+    font-weight: 500;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    min-width: 80px;
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: #66bb6a;
+    transform: translateY(-1px);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+#clearButton {
+    background-color: #ffab91;
+}
+
+#clearButton:hover {
+    background-color: #ff8a65;
+}
+
+#undoButton {
+    background-color: #90caf9;
+}
+
+#undoButton:hover {
+    background-color: #64b5f6;
+}
+
+#guessButton {
+    background-color: #a5d6a7;
+    color: #2e7d32;
+    font-weight: 600;
+    padding: 12px 24px;
+}
+
+#guessButton:hover {
+    background-color: #81c784;
+    color: white;
 }
 
 .color-picker, .line-width {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 8px;
+    background-color: #f7fafc;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #e2e8f0;
+}
+
+.color-picker span, .line-width span {
+    font-weight: 500;
+    color: #4a5568;
+    font-size: 14px;
+}
+
+#colorPicker {
+    width: 32px;
+    height: 32px;
+    border: 2px solid #e2e8f0;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#colorPicker:hover {
+    border-color: #81c784;
+}
+
+#lineWidth {
+    width: 80px;
+    height: 4px;
+    border-radius: 2px;
+    background: #e2e8f0;
+    outline: none;
+    cursor: pointer;
+    -webkit-appearance: none;
+}
+
+#lineWidth::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #81c784;
+    cursor: pointer;
+    border: 2px solid white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+#lineWidth::-webkit-slider-thumb:hover {
+    background: #66bb6a;
+}
+
+#lineWidth::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #81c784;
+    cursor: pointer;
+    border: 2px solid white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .result-panel {
     flex: 1;
     min-width: 300px;
-    background-color: #f9f9f9;
-    padding: 15px;
-    border-radius: 5px;
+    background-color: #ffffff;
+    padding: 24px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    position: sticky;
+    top: 20px;
+    transition: box-shadow 0.2s ease;
+}
+
+.result-panel:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+.result-panel h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #4a5568;
+    margin-bottom: 20px;
+    text-align: center;
 }
 
 #resultArea {
     min-height: 200px;
+    padding: 20px;
+    background-color: #f7fafc;
+    border-radius: 6px;
+    border: 1px solid #e2e8f0;
 }
 
-.hidden {
-    display: none;
+#resultArea p {
+    color: #718096;
+    text-align: center;
+    font-weight: 400;
+    margin: 0;
 }
 
 .spinner {
-    width: 40px;
-    height: 40px;
-    border: 4px solid rgba(0, 0, 0, 0.1);
+    width: 24px;
+    height: 24px;
+    border: 3px solid #e2e8f0;
     border-radius: 50%;
-    border-left-color: #4CAF50;
+    border-top-color: #81c784;
     animation: spin 1s linear infinite;
-    margin: 0 auto;
+    margin: 20px auto;
 }
 
 @keyframes spin {
@@ -96,23 +272,133 @@ button:hover {
     100% { transform: rotate(360deg); }
 }
 
+.hidden {
+    display: none;
+}
+
+#loadingIndicator {
+    text-align: center;
+    color: #718096;
+    font-weight: 400;
+}
+
+#loadingIndicator p {
+    margin-top: 12px;
+    font-size: 14px;
+}
+
 .prediction {
-    margin: 10px 0;
-    padding: 10px;
-    background-color: #e9f7ef;
-    border-radius: 4px;
-    border-left: 4px solid #4CAF50;
+    margin: 16px 0;
+    padding: 16px;
+    background-color: #f0f9f0;
+    border-radius: 6px;
+    border-left: 4px solid #81c784;
+}
+
+.prediction p {
+    margin: 6px 0;
+    color: #2d3748;
+    font-weight: 500;
+    text-align: left;
+    font-size: 14px;
 }
 
 .confidence-bar {
-    height: 10px;
-    background-color: #e0e0e0;
-    border-radius: 5px;
-    margin-top: 5px;
+    height: 8px;
+    background-color: #e2e8f0;
+    border-radius: 4px;
+    margin-top: 8px;
+    overflow: hidden;
 }
 
 .confidence-level {
     height: 100%;
-    background-color: #4CAF50;
-    border-radius: 5px;
+    background: linear-gradient(90deg, #81c784, #a5d6a7);
+    border-radius: 4px;
+    transition: width 0.6s ease;
+}
+
+.error {
+    padding: 16px;
+    background-color: #fff5f5;
+    border: 1px solid #fed7d7;
+    border-radius: 6px;
+    color: #c53030;
+    text-align: center;
+    font-size: 14px;
+}
+
+/* 响应式设计 */
+@media (max-width: 1024px) {
+    .game-area {
+        gap: 30px;
+    }
+
+    .drawing-panel {
+        min-width: auto;
+    }
+
+    .result-panel {
+        position: static;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 24px;
+        margin: 10px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    canvas {
+        width: 100%;
+        height: 280px;
+    }
+
+    .tools {
+        gap: 8px;
+    }
+
+    button {
+        padding: 8px 16px;
+        font-size: 13px;
+        min-width: 70px;
+    }
+
+    .color-picker, .line-width {
+        padding: 6px 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .tools {
+        justify-content: center;
+    }
+
+    .color-picker, .line-width {
+        flex: 1;
+        justify-content: center;
+        min-width: 120px;
+    }
+}
+
+/* 辅助样式 */
+.text-muted {
+    color: #718096;
+    font-size: 14px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.mt-2 {
+    margin-top: 8px;
+}
+
+.mb-2 {
+    margin-bottom: 8px;
 }
